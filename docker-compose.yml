@@ -19,7 +19,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  web:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -51,19 +51,19 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - web
+      - backend
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: ${DOCKERFILE:-Dockerfile.dev}
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
       - "3000:3000"
     depends_on:
-      - web
+      - backend
 
 volumes:
   postgres_data:
