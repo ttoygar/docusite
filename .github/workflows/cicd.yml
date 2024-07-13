@@ -61,21 +61,13 @@ jobs:
       - name: Run backend tests
         run: |
           cd backend
-          coverage run -m pytest
-          coverage report
-          coverage html
+          pytest
         env:
           POSTGRES_DB: test_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-html-report
-          path: backend/htmlcov
 
       - name: Run frontend tests
         run: |
