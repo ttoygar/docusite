@@ -10,6 +10,7 @@ import EditDocument from './pages/EditDocument';
 import DocumentDetailPage from './pages/DocumentDetailPage';
 import Login from './components/Login';
 import { getCurrentUser } from './api/auth';
+import './styles/global.css';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!getCurrentUser());

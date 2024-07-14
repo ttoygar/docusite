@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchDocument } from '../api/documents';
 import { Container, Typography, Button } from '@mui/material';
 import { useParams, Link } from 'react-router-dom';
+import '../styles/DocumentDetail.css';
 
 const DocumentDetail = () => {
   const { id } = useParams();
@@ -32,17 +33,17 @@ const DocumentDetail = () => {
   }
 
   return (
-    <Container>
-      <Typography variant="h4">{document.title}</Typography>
-      <Typography variant="body1">{document.content}</Typography>
+    <Container className="document-detail">
+      <Typography variant="h4" className="title">{document.title}</Typography>
+      <Typography variant="body1" className="content">{document.content}</Typography>
       <Button variant="contained" color="primary" component={Link} to={`/documents/${document.id}/edit`} sx={{ mt: 2 }}>
         Edit
       </Button>
       {childDocuments.length > 0 && (
-        <div>
-          <Typography variant="h5" sx={{ mt: 4 }}>Sub-Documents</Typography>
+        <div className="sub-documents">
+          <Typography variant="h5">Sub-Documents</Typography>
           {childDocuments.map((childDoc) => (
-            <Button key={childDoc.id} variant="contained" component={Link} to={`/documents/${childDoc.id}`} sx={{ mt: 1, ml: 1 }}>
+            <Button key={childDoc.id} variant="contained" component={Link} to={`/documents/${childDoc.id}`} className="button">
               {childDoc.title}
             </Button>
           ))}

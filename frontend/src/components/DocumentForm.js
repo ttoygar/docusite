@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createDocument, updateDocument, fetchDocuments } from '../api/documents';
-import { TextField, Button, Container, Typography, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import { TextField, Button, Container, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import '../styles/DocumentForm.css';
 
 const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
   const [title, setTitle] = useState(document ? document.title : '');
@@ -41,7 +42,7 @@ const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
   };
 
   return (
-    <Container>
+    <Container className="document-form">
       <Typography variant="h4">{document ? 'Edit Document' : 'New Document'}</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
@@ -50,6 +51,7 @@ const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
           onChange={(e) => setTitle(e.target.value)}
           fullWidth
           margin="normal"
+          className="field"
         />
         <TextField
           label="Content"
@@ -59,8 +61,9 @@ const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
           multiline
           rows={4}
           margin="normal"
+          className="field"
         />
-        <FormControl fullWidth margin="normal">
+        <FormControl fullWidth margin="normal" className="field">
           <InputLabel>Parent Document</InputLabel>
           <Select
             value={parentId}
@@ -74,7 +77,7 @@ const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
             ))}
           </Select>
         </FormControl>
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" color="primary" className="button">
           {document ? 'Update' : 'Create'}
         </Button>
       </form>

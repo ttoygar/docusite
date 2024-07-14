@@ -1,0 +1,14 @@
+.document-form {
+    margin-top: 20px;
+  }
+  
+  .document-form .field {
+    margin-bottom: 20px;
+  }
+  
+  .document-form .button {
+    margin-top: 20px;
+    background-color: #00796b;
+    color: white;
+  }
+  

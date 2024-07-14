@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { logout } from '../api/auth';
+import '../styles/NavBar.css';
 
 const NavBar = ({ onLogout }) => {
   const handleLogout = () => {
@@ -10,19 +11,19 @@ const NavBar = ({ onLogout }) => {
   };
 
   return (
-    <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar position="fixed" className="navbar" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Toolbar>
-        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" noWrap component="div" className="title" >
           Documentation
         </Typography>
         <Box>
-          <Button color="inherit" component={Link} to="/">
+          <Button className="button" component={Link} to="/">
             Home
           </Button>
-          <Button color="inherit" component={Link} to="/new">
+          <Button className="button" component={Link} to="/new">
             New Document
           </Button>
-          <Button color="inherit" onClick={handleLogout}>
+          <Button className="button" onClick={handleLogout}>
             Logout
           </Button>
         </Box>

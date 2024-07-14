@@ -1,0 +1,25 @@
+.document-detail {
+    margin-top: 20px;
+  }
+  
+  .document-detail .title {
+    margin-bottom: 10px;
+    color: #00796b;
+  }
+  
+  .document-detail .content {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .sub-documents {
+    margin-top: 40px;
+  }
+  
+  .sub-documents .button {
+    margin-top: 10px;
+    margin-left: 10px;
+    background-color: #00796b;
+    color: white;
+  }
+  

@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #00796b;
+    color: white;
+  }
+  
+  .navbar .title {
+    flex-grow: 1;
+  }
+  
+  .navbar .button {
+    color: white;
+    margin-left: 10px;
+  }
+  

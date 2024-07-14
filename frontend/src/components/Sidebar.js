@@ -4,6 +4,7 @@ import { List, ListItem, ListItemText, Typography, Drawer, Box, IconButton } fro
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { Link } from 'react-router-dom';
+import '../styles/Sidebar.css';
 
 const Sidebar = ({ refreshKey }) => {
   const [documents, setDocuments] = useState([]);
@@ -33,10 +34,10 @@ const Sidebar = ({ refreshKey }) => {
       .filter(doc => doc.parent === parentId)
       .map(doc => (
         <React.Fragment key={doc.id}>
-          <ListItem button component={Link} to={`/documents/${doc.id}`} sx={{ pl: level * 2 }}>
+          <ListItem button component={Link} to={`/documents/${doc.id}`} className={`list-item nested-list-item-${level}`}>
             <Box display="flex" alignItems="center">
               {docs.some(child => child.parent === doc.id) && (
-                <IconButton onClick={() => handleToggle(doc.id)}>
+                <IconButton onClick={() => handleToggle(doc.id)} className="expand-icon">
                   {open[doc.id] ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
               )}
@@ -50,16 +51,12 @@ const Sidebar = ({ refreshKey }) => {
 
   return (
     <Drawer
+      className="sidebar"
       variant="permanent"
       anchor="left"
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' },
-      }}
     >
       <Box sx={{ overflow: 'auto' }}>
-        <Typography variant="h6" gutterBottom sx={{ padding: 2 }}>
+        <Typography variant="h6" gutterBottom className="title">
           Documents
         </Typography>
         <List>

@@ -1,0 +1,38 @@
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background-color: #004d40;
+    color: white;
+  }
+  
+  .sidebar .MuiDrawer-paper {
+    width: 240px;
+    box-sizing: 'border-box';
+    background-color: #004d40;
+    color: white;
+  }
+  
+  .sidebar .title {
+    padding: 16px;
+    font-weight: bold;
+  }
+  
+  .sidebar .list-item {
+    padding-left: 24px;
+    color: white;
+  }
+  
+  .sidebar .nested-list-item {
+    padding-left: 48px;
+    color: white;
+  }
+  
+  .sidebar .expand-icon {
+    margin-left: auto;
+    color: white;
+  }
+  
+  .sidebar .nested-list {
+    padding-left: 16px;
+  }
+  
