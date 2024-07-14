@@ -41,13 +41,3 @@ export const updateDocument = async (id, document) => {
   });
   return response.data;
 };
-
-export const fetchCategories = async () => {
-  const token = localStorage.getItem('access_token');
-  const response = await axios.get(`${API_URL}/categories/`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};

@@ -14,15 +14,24 @@ const DocumentList = () => {
     fetchData();
   }, []);
 
+  const renderDocuments = (docs, parentId = null) => {
+    return docs
+      .filter(doc => doc.parent === parentId)
+      .map(doc => (
+        <React.Fragment key={doc.id}>
+          <ListItem button component={Link} to={`/documents/${doc.id}`}>
+            <ListItemText primary={doc.title} />
+          </ListItem>
+          {renderDocuments(docs, doc.id)}
+        </React.Fragment>
+      ));
+  };
+
   return (
     <Container>
       <Typography variant="h4">Documents</Typography>
       <List>
-        {documents.map((document) => (
-          <ListItem button component={Link} to={`/documents/${document.id}`} key={document.id}>
-            <ListItemText primary={document.title} />
-          </ListItem>
-        ))}
+        {renderDocuments(documents)}
       </List>
     </Container>
   );

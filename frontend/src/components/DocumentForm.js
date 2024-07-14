@@ -1,26 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { createDocument, updateDocument, fetchCategories } from '../api/documents';
-import { TextField, Button, Container, Typography, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import React, { useState } from 'react';
+import { createDocument, updateDocument } from '../api/documents';
+import { TextField, Button, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
+const DocumentForm = ({ document, parentId, onNewDocument, onDocumentUpdated }) => {
   const [title, setTitle] = useState(document ? document.title : '');
   const [content, setContent] = useState(document ? document.content : '');
-  const [categories, setCategories] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState(document ? document.categories.map(c => c.id) : []);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const categories = await fetchCategories();
-      setCategories(categories);
-    };
-    fetchData();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { title, content, category_ids: selectedCategories };
+    const payload = { title, content, parent: parentId || null };
     try {
       if (document) {
         await updateDocument(document.id, payload);
@@ -59,21 +49,6 @@ const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
           rows={4}
           margin="normal"
         />
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="category-label">Categories</InputLabel>
-          <Select
-            labelId="category-label"
-            multiple
-            value={selectedCategories}
-            onChange={(e) => setSelectedCategories(e.target.value)}
-          >
-            {categories.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
-                {category.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
         <Button type="submit" variant="contained" color="primary">
           {document ? 'Update' : 'Create'}
         </Button>

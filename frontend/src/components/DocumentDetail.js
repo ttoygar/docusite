@@ -30,6 +30,16 @@ const DocumentDetail = () => {
       <Button variant="contained" color="primary" component={Link} to={`/documents/${document.id}/edit`} sx={{ mt: 2 }}>
         Edit
       </Button>
+      {document.children && document.children.length > 0 && (
+        <div>
+          <Typography variant="h5" sx={{ mt: 4 }}>Sub-Documents</Typography>
+          {document.children.map((childId) => (
+            <Button key={childId} variant="contained" component={Link} to={`/documents/${childId}`} sx={{ mt: 1, ml: 1 }}>
+              {childId}
+            </Button>
+          ))}
+        </div>
+      )}
     </Container>
   );
 };
