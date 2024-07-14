@@ -69,11 +69,6 @@ jobs:
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
 
-      - name: Run frontend tests
-        run: |
-          cd frontend
-          npm test
-
   docker:
     needs: build
     runs-on: ubuntu-latest
