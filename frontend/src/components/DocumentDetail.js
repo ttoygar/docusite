@@ -6,12 +6,20 @@ import { useParams, Link } from 'react-router-dom';
 const DocumentDetail = () => {
   const { id } = useParams();
   const [document, setDocument] = useState(null);
+  const [childDocuments, setChildDocuments] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const doc = await fetchDocument(id);
         setDocument(doc);
+
+        if (doc.children && doc.children.length > 0) {
+          const childDocs = await Promise.all(
+            doc.children.map(childId => fetchDocument(childId))
+          );
+          setChildDocuments(childDocs);
+        }
       } catch (error) {
         console.error('Failed to fetch document', error);
       }
@@ -30,12 +38,12 @@ const DocumentDetail = () => {
       <Button variant="contained" color="primary" component={Link} to={`/documents/${document.id}/edit`} sx={{ mt: 2 }}>
         Edit
       </Button>
-      {document.children && document.children.length > 0 && (
+      {childDocuments.length > 0 && (
         <div>
           <Typography variant="h5" sx={{ mt: 4 }}>Sub-Documents</Typography>
-          {document.children.map((childId) => (
-            <Button key={childId} variant="contained" component={Link} to={`/documents/${childId}`} sx={{ mt: 1, ml: 1 }}>
-              {childId}
+          {childDocuments.map((childDoc) => (
+            <Button key={childDoc.id} variant="contained" component={Link} to={`/documents/${childDoc.id}`} sx={{ mt: 1, ml: 1 }}>
+              {childDoc.title}
             </Button>
           ))}
         </div>

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
-import { createDocument, updateDocument } from '../api/documents';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { createDocument, updateDocument, fetchDocuments } from '../api/documents';
+import { TextField, Button, Container, Typography, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const DocumentForm = ({ document, parentId, onNewDocument, onDocumentUpdated }) => {
+const DocumentForm = ({ document, onNewDocument, onDocumentUpdated }) => {
   const [title, setTitle] = useState(document ? document.title : '');
   const [content, setContent] = useState(document ? document.content : '');
+  const [parentId, setParentId] = useState(document ? document.parent : '');
+  const [documents, setDocuments] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const docs = await fetchDocuments();
+      setDocuments(docs);
+    };
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +60,20 @@ const DocumentForm = ({ document, parentId, onNewDocument, onDocumentUpdated }) 
           rows={4}
           margin="normal"
         />
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Parent Document</InputLabel>
+          <Select
+            value={parentId}
+            onChange={(e) => setParentId(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {documents.map(doc => (
+              <MenuItem key={doc.id} value={doc.id}>{doc.title}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <Button type="submit" variant="contained" color="primary">
           {document ? 'Update' : 'Create'}
         </Button>
