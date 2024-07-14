@@ -16,4 +16,4 @@ EXPOSE 8000
 
 ENV DJANGO_SETTINGS_MODULE=main.settings
 
-CMD ["gunicorn", "main.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "3"]
+CMD ["gunicorn", "main.wsgi:application", "--config", "gunicorn.conf.py"]
